@@ -29,4 +29,4 @@ query_entry.send_keys(Keys.RETURN)
 top_result = driver.find_element(by=By.CSS_SELECTOR, value='h3').click()
 
 # Quits the driver, closing the browser
-# driver.quit()
+driver.quit()
