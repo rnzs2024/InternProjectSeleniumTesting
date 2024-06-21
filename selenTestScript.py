@@ -28,5 +28,5 @@ query_entry.send_keys(Keys.RETURN)
 # Searches for CSS element with h3 tag (search results) and clicks it
 top_result = driver.find_element(by=By.CSS_SELECTOR, value='h3').click()
 
-# Quits the driver, closing the browser
+# Quits the driver, closing the browser (If you don't want browser to close, comment line below)
 driver.quit()
