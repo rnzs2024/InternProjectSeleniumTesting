@@ -14,6 +14,7 @@ chrome_options.add_experimental_option("detach", True)
 
 driver = webdriver.Chrome(options = chrome_options)
 driver.get("http://www.google.com")
+print(driver.title)
 
 # Searches for q element, which in this case is query (can be quote)
 query_entry = driver.find_element(by=By.NAME, value='q')
@@ -24,6 +25,7 @@ query_entry = driver.find_element(by=By.NAME, value='q')
 # Submits the entry 'ZS Associates' into the search bar and enters it
 query_entry.send_keys('ZS Associates')
 query_entry.send_keys(Keys.RETURN)
+print(driver.title)
 
 # Searches for CSS element with h3 tag (search results) and clicks it
 top_result = driver.find_element(by=By.CSS_SELECTOR, value='h3').click()
