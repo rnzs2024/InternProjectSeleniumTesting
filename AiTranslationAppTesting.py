@@ -14,17 +14,20 @@ import tests
 
 ############################### SET UP ###############################
 
+# Variable to store custom settings for browser
 chrome_options = webdriver.ChromeOptions()
 
-# Keeps browser open
+# Adds custom setting to keep browser open
 chrome_options.add_experimental_option("detach", True)
 
 
-driver = webdriver.Chrome(options = chrome_options)
-driver.get("https://translation-dev.amgen.com/file-translation")
-# print(driver.title)
+driver = webdriver.Chrome(options = chrome_options) # Stores options into web driver
 
-time.sleep(30) # wait for popup to time out and proceed w/ log in
+def startUpApp():
+
+    driver.get("https://translation-dev.amgen.com/file-translation") # Opens AI Translation app
+
+    time.sleep(30) # wait for popup to time out and proceed w/ log in
 
 ############################### LOG IN ###############################
 
@@ -70,3 +73,7 @@ def textTranslationTest(): # Can't test right now -> issue with login (continuou
     source_text_box = driver.find_element(By.XPATH, source_text_box_xpath)
     source_text_box.send_keys(tests.textTranslationTestCases.sample_text_1)
 
+# # Call methods
+# startUpBrowserAndApp()
+# loginUsingCredentials()
+# textTranslationTest()
