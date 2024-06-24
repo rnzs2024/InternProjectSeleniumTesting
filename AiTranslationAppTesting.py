@@ -2,12 +2,7 @@
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import time
-from selenium.webdriver.remote.webelement import WebElement
 from creds import *
 import tests
 
@@ -121,8 +116,8 @@ def adminTest():
     ### INCOMPLETE - need to have dev fixed ###
 
 # # Call methods
-# startUpApp()
-# loginUsingCredentials()
+# startUpApp() # fully functional
+# loginUsingCredentials() # fully functional
 # textTranslationTest()
 # fileTranslationTest()
 # businessGlossaryTest()
