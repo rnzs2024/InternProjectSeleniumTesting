@@ -26,7 +26,7 @@ def startUpApp():
 
     driver.get("https://translation-dev.amgen.com/file-translation") # Opens AI Translation app
 
-    time.sleep(30) # wait for popup to time out and proceed w/ log in
+    time.sleep(30) # wait for popup to time out and log in page to load
 
 ############################### LOG IN ###############################
 
@@ -121,7 +121,7 @@ def adminTest():
     ### INCOMPLETE - need to have dev fixed ###
 
 # # Call methods
-# startUpBrowserAndApp()
+# startUpApp()
 # loginUsingCredentials()
 # textTranslationTest()
 # fileTranslationTest()
