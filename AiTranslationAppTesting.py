@@ -10,7 +10,6 @@ import time
 from selenium.webdriver.remote.webelement import WebElement
 from creds import *
 import tests
-# import tests.textTranslationTestCases
 
 ############################### SET UP ###############################
 
@@ -73,7 +72,60 @@ def textTranslationTest(): # Can't test right now -> issue with login (continuou
     source_text_box = driver.find_element(By.XPATH, source_text_box_xpath)
     source_text_box.send_keys(tests.textTranslationTestCases.sample_text_1)
 
+
+    ### INCOMPLETE - need to have dev fixed ###
+
+def fileTranslationTest():
+
+    # Finds 'File' button and clicks on it, taking it to the File Translation page 
+    file_translation_page_button_xpath = '//*[@id="navbarNav"]/ul[1]/li[1]/a'
+    file_translation_page_button = driver.find_element(By.XPATH, file_translation_page_button_xpath)
+    file_translation_page_button.click()
+
+    ### INCOMPLETE - need to have dev fixed ###
+
+def businessGlossaryTest():
+
+    # Finds 'Business Glossary' button and clicks on it, taking it to the Business Glossary page
+    business_glossary_page_button_xpage = '//*[@id="navbarNav"]/ul[1]/li[3]/a'
+    business_glossary_page_button = driver.find_element(By.XPATH, business_glossary_page_button_xpage)
+    business_glossary_page_button.click()
+
+    ### INCOMPLETE - need to have dev fixed ###
+
+def faqTest():
+
+    # Finds 'FAQ' button and clicks on it, taking to the FAQ page
+    faq_page_button_xpath = '//*[@id="navbarNav"]/ul[1]/li[4]/a'
+    faq_page_button = driver.find_element(By.XPATH, faq_page_button_xpath)
+    faq_page_button.click()
+
+    ### INCOMPLETE - need to have dev fixed ###
+
+def usageMetricsTest():
+
+    # Finds 'Usage Metrics' button and clicks on it, taking to the Usage Metrics page
+    usage_metrics_page_button_xpath = '//*[@id="navbarNav"]/ul[1]/li[5]/a'
+    usage_metrics_page_button = driver.find_element(By.XPATH, usage_metrics_page_button_xpath)
+    usage_metrics_page_button.click()
+
+    ### INCOMPLETE - need to have dev fixed ###
+
+def adminTest():
+
+    # Finds 'Admin' button and clicks on it, taking to the Admin page
+    admin_page_button_xpath = '//*[@id="navbarNav"]/ul[1]/li[6]/a'
+    admin_page_button = driver.find_element(By.XPATH, admin_page_button_xpath)
+    admin_page_button.click()
+
+    ### INCOMPLETE - need to have dev fixed ###
+
 # # Call methods
 # startUpBrowserAndApp()
 # loginUsingCredentials()
 # textTranslationTest()
+# fileTranslationTest()
+# businessGlossaryTest()
+# faqTest()
+# usageMetricsTest()
+# adminTest()
