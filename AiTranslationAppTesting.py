@@ -57,7 +57,7 @@ def loginUsingCredentials():
         verify_button.click()
 
         # Waits for a specific element that indicates the login was successful and the page has fully loaded
-        post_login_element_xpath = '//*[@id="navbarNav"]/ul[1]/li[1]/a'  # Example element
+        post_login_element_xpath = '//*[@id="root"]/div/div/div[2]/div[2]/div/div/div/div[2]/div[2]'  # Example element -> 'View the FAQs'
         WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, post_login_element_xpath)))
         # time.sleep(10)
     
