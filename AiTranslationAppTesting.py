@@ -66,7 +66,7 @@ def loginUsingCredentials():
 
 def textTranslationTest(): # Can't test right now -> issue with login (continuously loading after login)
     
-    def googleTranslateTest():
+    def googleTextTranslateTest():
 
         # Finds translation service box and clicks dropdown button to initiate typing in service
         translation_service_dropdown_button_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload"]/div/div[2]/div[1]/div/div/div[2]/div'
@@ -112,7 +112,7 @@ def textTranslationTest(): # Can't test right now -> issue with login (continuou
         translate_text_button = driver.find_element(By.XPATH, translate_text_button_xpath)
         translate_text_button.click()
 
-    def microsoftTranslateTest():
+    def microsoftTextTranslateTest():
 
         # Finds translation service box and clicks dropdown button to initiate typing in service
         translation_service_dropdown_button_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload"]/div/div[2]/div[1]/div/div/div[2]/div'
@@ -163,12 +163,12 @@ def textTranslationTest(): # Can't test right now -> issue with login (continuou
         text_translation_page_button.click()
 
         if (tests.textTranslationTestCases == 'Google Translate'):
-            googleTranslateTest()
+            googleTextTranslateTest()
         elif (tests.textTranslationTestCases == 'Microsoft Translator'):
-            microsoftTranslateTest()
+            microsoftTextTranslateTest()
         else:
             # Default selection will be google translate
-            googleTranslateTest()
+            googleTextTranslateTest()
 
 
     #### NEED TO INCLUDE BUSINESS GLOSSARY TESTING ####
