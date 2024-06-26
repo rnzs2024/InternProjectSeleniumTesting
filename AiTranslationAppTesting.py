@@ -170,6 +170,9 @@ def textTranslationTest(): # Can't test right now -> issue with login (continuou
             # Default selection will be google translate
             googleTranslateTest()
 
+
+    #### NEED TO INCLUDE BUSINESS GLOSSARY TESTING ####
+
     except Exception as e:
         print(f"Error during text translation test: {e}")
 
