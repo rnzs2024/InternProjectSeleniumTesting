@@ -82,12 +82,12 @@ def textTranslationTest(): # Can't test right now -> issue with login (continuou
         # Checks if the source language variable is empty (happens user wants source language to be auto detected)
         if (tests.textTranslationTestCases.source_language_1 != ''):
 
-            # Finds the 'Source Text' box and clicks the dropdown button to initiate typing in language
+            # Finds the 'Source Language' box and clicks the dropdown button to initiate typing in language
             source_language_dropdown_button_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload"]/div/div[3]/div[1]/div[1]/div[2]/div/div[2]/div'
             source_language_dropdown_button = driver.find_element(By.XPATH, source_language_dropdown_button_xpath)
             source_language_dropdown_button.click()
         
-            # Find source language input pox and type in source language
+            # Find source language input box and type in source language
             source_language_select_xpath = '//*[@id="react-select-6-input"]'
             source_language_select = driver.find_element(By.XPATH, source_language_select_xpath)
             source_language_select.send_keys(tests.textTranslationTestCases.source_language_1)
@@ -101,7 +101,7 @@ def textTranslationTest(): # Can't test right now -> issue with login (continuou
         target_language_select.send_keys(tests.textTranslationTestCases.target_language_1)
         target_language_select.send_keys(Keys.ENTER)
 
-        # Finds text box and enters in source language
+        # Finds source text box and enters in sample text
         source_text_box_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload"]/div/div[3]/div[2]/div[1]/label/div/textarea'
         source_text_box = driver.find_element(By.XPATH, source_text_box_xpath)
         source_text_box.click()
@@ -127,7 +127,7 @@ def textTranslationTest(): # Can't test right now -> issue with login (continuou
 
         ### NOTE_to_remember: Microsoft does not offer auto translate, thus the if statement will not be here
 
-        # Finds the 'Source Text' box and clicks the dropdown button to initiate typing in language
+        # Finds the 'Source Language' box and clicks the dropdown button to initiate typing in language
         source_language_dropdown_button_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload"]/div/div[3]/div[1]/div[1]/div[2]/div/div[2]/div'
         source_language_dropdown_button = driver.find_element(By.XPATH, source_language_dropdown_button_xpath)
         source_language_dropdown_button.click()
@@ -144,7 +144,7 @@ def textTranslationTest(): # Can't test right now -> issue with login (continuou
         target_language_select.send_keys(tests.textTranslationTestCases.target_language_1)
         target_language_select.send_keys(Keys.ENTER)
 
-        # Finds text box and enters in source language
+        # Finds source text box and enters in sample text
         source_text_box_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload"]/div/div[3]/div[2]/div[1]/label/div/textarea'
         source_text_box = driver.find_element(By.XPATH, source_text_box_xpath)
         source_text_box.click()
