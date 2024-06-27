@@ -2,12 +2,12 @@
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import time
-from creds import *
-import tests
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
+import time
+from creds import *
+import tests
 
 ############################### SET UP ###############################
 
@@ -24,7 +24,8 @@ def startUpApp():
 
     driver.get("https://translation-dev.amgen.com/file-translation") # Opens AI Translation app FT page - allows script to access buttons on top
 
-    time.sleep(30) # wait for popup to time out and log in page to load
+    #### CHANGE THIS TO WAIT FOR PAGE TO LOAD TO IMPROVE SPEED OF LOGIN ####
+    #time.sleep(10) # wait for popup to time out and log in page to load
 
 ############################### LOG IN ###############################
 
@@ -33,6 +34,10 @@ PASSWORD = AUTH_OKTA_PASSWORD # imported from creds file
 
 def loginUsingCredentials():
     try:
+        # waits for username login to load
+        user_login_xpath = '//*[@id="form20"]/div[1]/div[3]/div[1]/div[1]'
+        WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, user_login_xpath)))
+
         # Finds the username box through XPATH and inputs username variable
         username_field_xpath = '//*[@id="input28"]'
         username_field = driver.find_element(By.XPATH, username_field_xpath)
