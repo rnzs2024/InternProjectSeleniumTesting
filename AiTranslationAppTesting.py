@@ -24,8 +24,7 @@ def startUpApp():
 
     driver.get("https://translation-dev.amgen.com/file-translation") # Opens AI Translation app FT page - allows script to access buttons on top
 
-    #### CHANGE THIS TO WAIT FOR PAGE TO LOAD TO IMPROVE SPEED OF LOGIN ####
-    #time.sleep(10) # wait for popup to time out and log in page to load
+    #time.sleep(10) # wait for popup to time out and log in page to load -> now handled by login function
 
 ############################### LOG IN ###############################
 
