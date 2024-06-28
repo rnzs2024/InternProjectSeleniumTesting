@@ -69,7 +69,7 @@ def loginUsingCredentials():
 
 ############################### TESTING ###############################
 
-def textTranslationTest(): # Can't test right now -> issue with login (continuously loading after login)
+def textTranslationTest(): 
     
     def googleTextTranslateTest():
 
