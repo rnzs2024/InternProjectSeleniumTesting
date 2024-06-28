@@ -8,6 +8,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 from creds import *
 import tests
+# import klembord
 
 ############################### SET UP ###############################
 
@@ -116,6 +117,20 @@ def textTranslationTest(): # Can't test right now -> issue with login (continuou
         translate_text_button = driver.find_element(By.XPATH, translate_text_button_xpath)
         translate_text_button.click()
 
+        # Finds translated text and stores it in variable
+        translated_text_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload"]/div/div[3]/div[2]/div[2]/label/div/textarea'
+        WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, translated_text_xpath)))
+
+        translated_text = driver.find_element(By.XPATH, translated_text_xpath).text
+        print(translated_text)
+
+
+        ### Add History tab test  - make sure to do this for Microsoft ####
+
+        # history_text_translation_tab_xpath = '//*[@id="uncontrolled-tab-example-tab-file-upload-log"]'
+        # history_text_translation_tab = driver.find_element(By.XPATH, history_text_translation_tab_xpath)
+        # history_text_translation_tab.click()
+
     def microsoftTextTranslateTest():
 
         # Finds translation service box and clicks dropdown button to initiate typing in service
@@ -158,6 +173,13 @@ def textTranslationTest(): # Can't test right now -> issue with login (continuou
         translate_text_button_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload"]/div/div[4]/button'
         translate_text_button = driver.find_element(By.XPATH, translate_text_button_xpath)
         translate_text_button.click()
+
+        # Finds translated text and stores it in variable
+        translated_text_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload"]/div/div[3]/div[2]/div[2]/label/div/textarea'
+        WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, translated_text_xpath)))
+
+        translated_text = driver.find_element(By.XPATH, translated_text_xpath).text
+        print(translated_text)
     
     try:
         # Finds 'Text' button and clicks on it, taking it to the Text Translation page
