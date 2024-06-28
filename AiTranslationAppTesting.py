@@ -125,11 +125,38 @@ def textTranslationTest(): # Can't test right now -> issue with login (continuou
         print(translated_text)
 
 
-        ### Add History tab test  - make sure to do this for Microsoft ####
+        ### Add History tab test  - make sure to everything below for Microsoft ####
 
-        # history_text_translation_tab_xpath = '//*[@id="uncontrolled-tab-example-tab-file-upload-log"]'
-        # history_text_translation_tab = driver.find_element(By.XPATH, history_text_translation_tab_xpath)
-        # history_text_translation_tab.click()
+        # Clicks on History tab
+        history_text_translation_tab_xpath = '//*[@id="uncontrolled-tab-example-tab-file-upload-log"]'
+        history_text_translation_tab = driver.find_element(By.XPATH, history_text_translation_tab_xpath)
+        history_text_translation_tab.click()
+
+        # Waits for page to load by looking for "Original Text" and then clicks on refresh button
+        original_text_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload-log"]/div/section/div[2]/div/div/div/div/div/div/div/div/table/thead/tr/th[1]/div/span[1]'
+        refresh_button_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload-log"]/div/section/div[1]/div/div/div/button'
+        WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, original_text_xpath)))
+
+        refresh_button = driver.find_element(By.XPATH, refresh_button_xpath)
+        refresh_button.click()
+
+        # Searches for sample text that was translated in history tab
+        sample_text_translation_search_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload-log"]/div/section/div[1]/div/div/div/span/span/span[1]/input'
+        WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, original_text_xpath)))
+
+        sample_text_translation_search = driver.find_element(By.XPATH, sample_text_translation_search_xpath)
+        sample_text_translation_search.send_keys(tests.textTranslationTestCases.sample_text_1)
+        sample_text_translation_search.send_keys(Keys.ENTER)
+
+        # Preview translation of sample text (selectin top row) - NEED TO FIX
+        preview_text_translation_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload-log"]/div/section/div[2]/div/div/div/div/div/div/div/div/table/tbody/tr/td[7]/div/div/div/svg[1]'
+        preview_text_translation = driver.find_element(By.XPATH, preview_text_translation_xpath)
+        preview_text_translation.click()
+
+        # # Download translated text - uncomment and test after preview button is fixed
+        # download_translated_text_button_xpath = '//*[@id="root"]/div/div/div[2]/div[2]/div/div[1]/div[1]/button'
+        # download_translated_text_button = driver.find_element(By.XPATH, download_translated_text_button_xpath)
+        # download_translated_text_button.click()
 
     def microsoftTextTranslateTest():
 
