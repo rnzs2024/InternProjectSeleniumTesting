@@ -2,8 +2,8 @@
     "execution_method": "chrome",
     "execution_plan": "1,2",
     "testcase_list": {
-       "1" : "TC_01_Login_Application",
-       "2" : "TC_02_Logout_Application",
+       "1" : "TC_01_Open_And_Login_Application",
+       "2" : "TC_02_Logout_And_Close_Application",
        "3" : "TC_03_Load_Text_Translation_Page",
        "4" : "TC_04_Google_Text_Translation_English_Arabic",
        "5" : "TC_05_Google_Text_Translation_English_Arabic_With_Glossary",
