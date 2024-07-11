@@ -79,6 +79,7 @@ def runTC04():
         source_language = 'English' # Must be exact match as in dropdown or empty for Auto Detect
         target_language = 'Arabic' # Must be exact match as in dropdown
         translation_service = 'Google' # Must be exactly 'Microsoft' or 'Google'
+        helperMethods.refreshTextTranslationPage()
         helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
         
     except Exception as e:
@@ -91,6 +92,7 @@ def runTC06():
         source_language = 'English' # Must be exact match as in dropdown or empty for Auto Detect
         target_language = 'Chinese (Simplified)' # Must be exact match as in dropdown
         translation_service = 'Google' # Must be exactly 'Microsoft' or 'Google'
+        helperMethods.refreshTextTranslationPage()
         helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
 
     except Exception as e:
@@ -103,6 +105,7 @@ def runTC08():
         source_language = 'French' # Must be exact match as in dropdown or empty for Auto Detect
         target_language = 'Japanese' # Must be exact match as in dropdown
         translation_service = 'Google' # Must be exactly 'Microsoft' or 'Google'
+        helperMethods.refreshTextTranslationPage()
         helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
 
     except Exception as e:
@@ -115,6 +118,7 @@ def runTC10():
         source_language = 'English' # Must be exact match as in dropdown or empty for Auto Detect
         target_language = 'Hindi' # Must be exact match as in dropdown
         translation_service = 'Google' # Must be exactly 'Microsoft' or 'Google'
+        helperMethods.refreshTextTranslationPage()
         helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
 
     except Exception as e:
@@ -127,6 +131,7 @@ def runTC12():
         source_language = 'English' # Must be exact match as in dropdown or empty for Auto Detect
         target_language = 'Arabic' # Must be exact match as in dropdown
         translation_service = 'Microsoft' # Must be exactly 'Microsoft' or 'Google'
+        helperMethods.refreshTextTranslationPage()
         helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
 
     except Exception as e:
@@ -139,6 +144,7 @@ def runTC14():
         source_language = 'French' # Must be exact match as in dropdown or empty for Auto Detect
         target_language = 'Japanese' # Must be exact match as in dropdown
         translation_service = 'Microsoft' # Must be exactly 'Microsoft' or 'Google'
+        helperMethods.refreshTextTranslationPage()
         helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
 
     except Exception as e:
@@ -151,10 +157,17 @@ def runTC16():
         source_language = 'English' # Must be exact match as in dropdown or empty for Auto Detect
         target_language = 'Hindi' # Must be exact match as in dropdown
         translation_service = 'Microsoft' # Must be exactly 'Microsoft' or 'Google'
+        helperMethods.refreshTextTranslationPage()
         helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
 
     except Exception as e:
         print(f"Error during TC16: {e}")
+
+def runTC18():
+    try:
+        helperMethods.loadFileTranslationPage()
+    except Exception as e:
+        print(f"Error during TC18: {e}")
 
 for i in execution_list:
     if (i == 'TC_01_Open_And_Login_Application'):
@@ -191,5 +204,7 @@ for i in execution_list:
        runTC16()
     if (i == 'TC_17_Microsoft_Text_Translation_English_Hindi_With_Glossary'):
        print("Coming soon")
+    if (i == 'TC_18_Load_File_Translation_Page'):
+       runTC18()
        
     
