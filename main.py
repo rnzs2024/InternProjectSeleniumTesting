@@ -66,7 +66,32 @@ def runTC02():
     except Exception as e:
         print(f"Error during TC02: {e}")
 
-if ('TC_01_Open_And_Login_Application' in execution_list):
-    runTC01()
-if ('TC_02_Logout_And_Close_Application' in execution_list):
-    runTC02()
+def runTC03():
+    try:
+        helperMethods.loadTextTranslationPage()
+    except Exception as e:
+        print(f"Error during TC03: {e}")
+
+def runTC04():
+    try:
+        sample_text = 'This is a sample text'
+        source_language = 'English' # Must be exact match as in dropdown, can only be empty if using Google Translate
+        target_language = 'Arabic' # Must be exact match as in dropdown
+        translation_service = 'Google' # Must be exactly 'Microsoft' or 'Google'
+        helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
+        
+    except Exception as e:
+        print(f"Error during TC04: {e}")
+
+for i in execution_list:
+    if (i == 'TC_01_Open_And_Login_Application'):
+        runTC01()
+    if (i == 'TC_02_Logout_And_Close_Application'):
+        runTC02()
+    if (i == 'TC_03_Load_Text_Translation_Page'):
+        runTC03()
+    if (i == 'TC_04_Google_Text_Translation_English_Arabic'):
+        runTC04()
+# runTC01()
+# runTC03()
+# runTC04()

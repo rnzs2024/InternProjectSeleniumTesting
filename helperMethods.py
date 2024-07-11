@@ -72,7 +72,15 @@ def loginUsingCredentials():
 
 ############################### TESTING ###############################
 
-def textTranslationTest(): 
+
+def loadTextTranslationPage():
+    # Finds 'Text' button and clicks on it, taking it to the Text Translation page
+    text_translation_page_button_xpath = '//*[@id="navbarNav"]/ul[1]/li[2]/a'
+    WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, text_translation_page_button_xpath)))
+    text_translation_page_button = driver.find_element(By.XPATH, text_translation_page_button_xpath)
+    text_translation_page_button.click()
+
+def textTranslationTest(sample_text, source_language, target_language,translation_service): 
     
     def googleTextTranslateTest():
 
@@ -84,11 +92,11 @@ def textTranslationTest():
         # Finds translation service input box and enters in desired service
         translation_service_select_xpath = '//*[@id="react-select-5-input"]'
         translation_service_select = driver.find_element(By.XPATH, translation_service_select_xpath)
-        translation_service_select.send_keys(tests.textTranslationTestCases.translation_service)
+        translation_service_select.send_keys(translation_service)
         translation_service_select.send_keys(Keys.ENTER)
 
         # Checks if the source language variable is empty (happens user wants source language to be auto detected)
-        if (tests.textTranslationTestCases.source_language_1 != ''):
+        if (source_language != ''):
 
             # Finds the 'Source Language' box and clicks the dropdown button to initiate typing in language
             source_language_dropdown_button_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload"]/div/div[3]/div[1]/div[1]/div[2]/div/div[2]/div'
@@ -98,7 +106,7 @@ def textTranslationTest():
             # Find source language input box and type in source language
             source_language_select_xpath = '//*[@id="react-select-6-input"]'
             source_language_select = driver.find_element(By.XPATH, source_language_select_xpath)
-            source_language_select.send_keys(tests.textTranslationTestCases.source_language_1)
+            source_language_select.send_keys(source_language)
             source_language_select.send_keys(Keys.ENTER)
         else:
             print("Auto detecting language")
@@ -106,14 +114,14 @@ def textTranslationTest():
         # Find target language input box and type in target language
         target_language_select_xpath = '//*[@id="react-select-7-input"]'
         target_language_select = driver.find_element(By.XPATH, target_language_select_xpath)
-        target_language_select.send_keys(tests.textTranslationTestCases.target_language_1)
+        target_language_select.send_keys(target_language)
         target_language_select.send_keys(Keys.ENTER)
 
         # Finds source text box and enters in sample text
         source_text_box_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload"]/div/div[3]/div[2]/div[1]/label/div/textarea'
         source_text_box = driver.find_element(By.XPATH, source_text_box_xpath)
         source_text_box.click()
-        source_text_box.send_keys(tests.textTranslationTestCases.sample_text_1)
+        source_text_box.send_keys(sample_text)
 
         # Finds 'Translate' button and clicks it
         translate_text_button_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload"]/div/div[4]/button'
@@ -148,7 +156,7 @@ def textTranslationTest():
         WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, original_text_xpath)))
 
         sample_text_translation_search = driver.find_element(By.XPATH, sample_text_translation_search_xpath)
-        sample_text_translation_search.send_keys(tests.textTranslationTestCases.sample_text_1)
+        sample_text_translation_search.send_keys(sample_text)
         sample_text_translation_search.send_keys(Keys.ENTER)
 
         # Preview translation of sample text (selectin top row) - NEED TO FIX
@@ -171,7 +179,7 @@ def textTranslationTest():
         # Finds translation service input box and enters in desired service
         translation_service_select_xpath = '//*[@id="react-select-5-input"]'
         translation_service_select = driver.find_element(By.XPATH, translation_service_select_xpath)
-        translation_service_select.send_keys(tests.textTranslationTestCases.translation_service)
+        translation_service_select.send_keys(translation_service)
         translation_service_select.send_keys(Keys.ENTER)
 
         ### NOTE_to_remember: Microsoft does not offer auto translate, thus the if statement will not be here
@@ -184,20 +192,20 @@ def textTranslationTest():
         # Find source language input pox and type in source language
         source_language_select_xpath = '//*[@id="react-select-6-input"]'
         source_language_select = driver.find_element(By.XPATH, source_language_select_xpath)
-        source_language_select.send_keys(tests.textTranslationTestCases.source_language_1)
+        source_language_select.send_keys(source_language)
         source_language_select.send_keys(Keys.ENTER)
 
         # Find target language input box and type in target language
         target_language_select_xpath = '//*[@id="react-select-7-input"]'
         target_language_select = driver.find_element(By.XPATH, target_language_select_xpath)
-        target_language_select.send_keys(tests.textTranslationTestCases.target_language_1)
+        target_language_select.send_keys(target_language)
         target_language_select.send_keys(Keys.ENTER)
 
         # Finds source text box and enters in sample text
         source_text_box_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload"]/div/div[3]/div[2]/div[1]/label/div/textarea'
         source_text_box = driver.find_element(By.XPATH, source_text_box_xpath)
         source_text_box.click()
-        source_text_box.send_keys(tests.textTranslationTestCases.sample_text_1)
+        source_text_box.send_keys(sample_text)
 
         # Finds 'Translate' button and clicks it
         translate_text_button_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload"]/div/div[4]/button'
@@ -212,15 +220,11 @@ def textTranslationTest():
         print(translated_text)
     
     try:
-        # Finds 'Text' button and clicks on it, taking it to the Text Translation page
-        text_translation_page_button_xpath = '//*[@id="navbarNav"]/ul[1]/li[2]/a'
-        WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, text_translation_page_button_xpath)))
-        text_translation_page_button = driver.find_element(By.XPATH, text_translation_page_button_xpath)
-        text_translation_page_button.click()
+        
 
-        if (tests.textTranslationTestCases == 'Google Translate'):
+        if (translation_service == 'Google'):
             googleTextTranslateTest()
-        elif (tests.textTranslationTestCases == 'Microsoft Translator'):
+        elif (translation_service == 'Microsoft'):
             microsoftTextTranslateTest()
         else:
             # Default selection will be google translate
