@@ -6,7 +6,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 import time
+from datetime import date
 from creds import *
+import os
 import testSettings
 
 ############################### SET UP ###############################
@@ -23,10 +25,12 @@ def startUpApp():
     # Adds custom setting to keep browser open
     chrome_options.add_experimental_option("detach", True)
 
+    chrome_options.add_argument("--incognito")
+
     driver = webdriver.Chrome(options = chrome_options) # Stores options into web driver
 
 
-    driver.get("https://translation-dev.amgen.com/file-translation") # Opens AI Translation app FT page - allows script to access buttons on top
+    driver.get("https://translation.amgen.com/file-translation") # Opens AI Translation app FT page - allows script to access buttons on top
 
     #time.sleep(10) # wait for popup to time out and log in page to load -> now handled by login function
 
@@ -171,9 +175,6 @@ def textTranslationTest(sample_text, source_language, target_language,translatio
         sample_text_translation_search_clear_button = driver.find_element(By.XPATH, sample_text_translation_search_clear_button_xpath)
         sample_text_translation_search_clear_button.click()
 
-        return_back_xpath = '//*[@id="uncontrolled-tab-example-tab-file-upload"]'
-        return_back = driver.find_element(By.XPATH, return_back_xpath)
-        return_back.click()
         # sample_text_translation_search.send_keys(Keys.ENTER)
 
         # Preview translation of sample text (selectin top row) - NEED TO FIX
@@ -192,14 +193,14 @@ def textTranslationTest(sample_text, source_language, target_language,translatio
     except Exception as e:
         print(f"Error during text translation test: {e}")
 
-def refreshTextTranslationPage():
+def returnToTextTranslationPage():
     # driver.refresh()
     text_translate_button_xpath = '//*[@id="uncontrolled-tab-example-tab-file-upload"]'
     WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, text_translate_button_xpath)))
     text_translate_button = driver.find_element(By.XPATH, text_translate_button_xpath)
     text_translate_button.click()
 
-def uploadGlossaryTextTranslationPage():
+def uploadGlossaryTextTranslationPage(source_language, target_language, business_glossary):
     add_business_glossary_button_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload"]/div/div[4]/div/button'
     WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, add_business_glossary_button_xpath)))
     add_business_glossary_button = driver.find_element(By.XPATH, add_business_glossary_button_xpath)
@@ -213,8 +214,52 @@ def uploadGlossaryTextTranslationPage():
     upload_glossary_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[2]/div[3]/div/div/input'
     WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, upload_glossary_xpath)))
     upload_glossary = driver.find_element(By.XPATH, upload_glossary_xpath)
-    upload_glossary.send_keys('businessGlossaries/test_bg.csv')
+    test_bg_abs_path = os.path.abspath(f'./businessGlossaries/{testSettings.textTranslationTestSettings.business_glossary}')
+    print(test_bg_abs_path)
+    upload_glossary.send_keys(test_bg_abs_path)
+    
+    wait_for_upload_glossary_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[2]/div[3]/span'
+    WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, wait_for_upload_glossary_xpath)))
 
+    time.sleep(2)
+
+    source_language_select_xpath = '//*[@id="react-select-8-input"]'
+    source_language_select = driver.find_element(By.XPATH, source_language_select_xpath)
+    source_language_select.send_keys(source_language)
+    source_language_select.send_keys(Keys.ENTER)
+
+    target_language_select_xpath = '//*[@id="react-select-9-input"]'
+    target_language_select = driver.find_element(By.XPATH, target_language_select_xpath)
+    target_language_select.send_keys(target_language)
+    target_language_select.send_keys(Keys.ENTER)
+
+    description_box_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[2]/div[5]/textarea'
+    description_box = driver.find_element(By.XPATH, description_box_xpath)
+    today_date = date.today()
+    description_input = f'Testing {source_language} to {target_language} translation on {today_date}'
+    description_box.send_keys(description_input)
+
+    upload_glossary_button_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[2]/div[6]/button[2]'
+    upload_glossary_button = driver.find_element(By.XPATH, upload_glossary_button_xpath)
+    time.sleep(0.25)
+    upload_glossary_button.click()
+
+    time.sleep(9)
+    
+    back_button_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[1]/span'
+    back_button = driver.find_element(By.XPATH, back_button_xpath)
+    back_button.click()
+
+    glossary_page_load_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[1]/div[2]/div[3]/div[1]/div[2]'
+    WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, glossary_page_load_xpath)))
+
+    search_for_glossary_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[1]/div[2]/div[2]/div/span/span/span[1]/input'
+    search_for_glossary = driver.find_element(By.XPATH, search_for_glossary_xpath)
+    search_for_glossary.send_keys(business_glossary)
+    search_for_glossary.send_keys(Keys.ENTER)
+
+    # add ability to click the plus button to add glossary and then click add to translation button
+    
 def loadFileTranslationPage():
     try:
         # Finds 'File' button and clicks on it, taking it to the File Translation page 

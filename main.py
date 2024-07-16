@@ -79,7 +79,7 @@ def runTC04():
         source_language = 'English' # Must be exact match as in dropdown or empty for Auto Detect
         target_language = 'Arabic' # Must be exact match as in dropdown
         translation_service = 'Google' # Must be exactly 'Microsoft' or 'Google'
-        helperMethods.refreshTextTranslationPage()
+        helperMethods.returnToTextTranslationPage()
         helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
         
     except Exception as e:
@@ -88,12 +88,14 @@ def runTC04():
 def runTC05():
     try:
         sample_text = testSettings.sample_text
+        business_glossary = testSettings.textTranslationTestSettings.business_glossary
+        # business_glossary = os.path.abspath(f'./businessGlossaries/{business_glossary}')
         source_language = 'English' # Must be exact match as in dropdown or empty for Auto Detect
         target_language = 'Arabic' # Must be exact match as in dropdown
         translation_service = 'Google' # Must be exactly 'Microsoft' or 'Google'
-        helperMethods.uploadGlossaryTextTranslationPage()
-        helperMethods.refreshTextTranslationPage()
-        helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
+        helperMethods.returnToTextTranslationPage()
+        helperMethods.uploadGlossaryTextTranslationPage(source_language, target_language, business_glossary)
+        # helperMethods.textTranslationTest(sample_text, source_language, target_language, translation_service)
         
     except Exception as e:
         print(f"Error during TC05: {e}")
@@ -105,7 +107,7 @@ def runTC06():
         source_language = 'English' # Must be exact match as in dropdown or empty for Auto Detect
         target_language = 'Chinese (Simplified)' # Must be exact match as in dropdown
         translation_service = 'Google' # Must be exactly 'Microsoft' or 'Google'
-        helperMethods.refreshTextTranslationPage()
+        helperMethods.returnToTextTranslationPage()
         helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
 
     except Exception as e:
@@ -118,7 +120,7 @@ def runTC08():
         source_language = 'French' # Must be exact match as in dropdown or empty for Auto Detect
         target_language = 'Japanese' # Must be exact match as in dropdown
         translation_service = 'Google' # Must be exactly 'Microsoft' or 'Google'
-        helperMethods.refreshTextTranslationPage()
+        helperMethods.returnToTextTranslationPage()
         helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
 
     except Exception as e:
@@ -131,7 +133,7 @@ def runTC10():
         source_language = 'English' # Must be exact match as in dropdown or empty for Auto Detect
         target_language = 'Hindi' # Must be exact match as in dropdown
         translation_service = 'Google' # Must be exactly 'Microsoft' or 'Google'
-        helperMethods.refreshTextTranslationPage()
+        helperMethods.returnToTextTranslationPage()
         helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
 
     except Exception as e:
@@ -144,7 +146,7 @@ def runTC12():
         source_language = 'English' # Must be exact match as in dropdown or empty for Auto Detect
         target_language = 'Arabic' # Must be exact match as in dropdown
         translation_service = 'Microsoft' # Must be exactly 'Microsoft' or 'Google'
-        helperMethods.refreshTextTranslationPage()
+        helperMethods.returnToTextTranslationPage()
         helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
 
     except Exception as e:
@@ -157,7 +159,7 @@ def runTC14():
         source_language = 'French' # Must be exact match as in dropdown or empty for Auto Detect
         target_language = 'Japanese' # Must be exact match as in dropdown
         translation_service = 'Microsoft' # Must be exactly 'Microsoft' or 'Google'
-        helperMethods.refreshTextTranslationPage()
+        helperMethods.returnToTextTranslationPage()
         helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
 
     except Exception as e:
@@ -170,7 +172,7 @@ def runTC16():
         source_language = 'English' # Must be exact match as in dropdown or empty for Auto Detect
         target_language = 'Hindi' # Must be exact match as in dropdown
         translation_service = 'Microsoft' # Must be exactly 'Microsoft' or 'Google'
-        helperMethods.refreshTextTranslationPage()
+        helperMethods.returnToTextTranslationPage()
         helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
 
     except Exception as e:
