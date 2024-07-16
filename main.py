@@ -85,6 +85,19 @@ def runTC04():
     except Exception as e:
         print(f"Error during TC04: {e}")
 
+def runTC05():
+    try:
+        sample_text = testSettings.sample_text
+        source_language = 'English' # Must be exact match as in dropdown or empty for Auto Detect
+        target_language = 'Arabic' # Must be exact match as in dropdown
+        translation_service = 'Google' # Must be exactly 'Microsoft' or 'Google'
+        helperMethods.uploadGlossaryTextTranslationPage()
+        helperMethods.refreshTextTranslationPage()
+        helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
+        
+    except Exception as e:
+        print(f"Error during TC05: {e}")
+
 def runTC06():
 
     try:
@@ -179,7 +192,7 @@ for i in execution_list:
     if (i == 'TC_04_Google_Text_Translation_English_Arabic'):
         runTC04()
     if (i == 'TC_05_Google_Text_Translation_English_Arabic_With_Glossary'):
-        print("Coming soon")
+        runTC05()
     if (i == 'TC_06_Google_Text_Translation_English_Chinese'):
         runTC06()
     if (i == 'TC_07_Google_Text_Translation_English_Chinese_With_Glossary'):

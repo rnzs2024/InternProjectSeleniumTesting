@@ -1,6 +1,6 @@
 {
     "execution_method": "chrome",
-    "execution_plan": "1,1,3,4,6,6",
+    "execution_plan": "1,1,3,3,5,5",
     "testcase_list": {
        "1" : "TC_01_Open_And_Login_Application",
        "2" : "TC_02_Logout_And_Close_Application",

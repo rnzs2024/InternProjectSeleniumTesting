@@ -170,6 +170,10 @@ def textTranslationTest(sample_text, source_language, target_language,translatio
         sample_text_translation_search_clear_button_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload-log"]/div/section/div[1]/div/div/div/span/span/span[1]/span/span'
         sample_text_translation_search_clear_button = driver.find_element(By.XPATH, sample_text_translation_search_clear_button_xpath)
         sample_text_translation_search_clear_button.click()
+
+        return_back_xpath = '//*[@id="uncontrolled-tab-example-tab-file-upload"]'
+        return_back = driver.find_element(By.XPATH, return_back_xpath)
+        return_back.click()
         # sample_text_translation_search.send_keys(Keys.ENTER)
 
         # Preview translation of sample text (selectin top row) - NEED TO FIX
@@ -194,6 +198,23 @@ def refreshTextTranslationPage():
     WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, text_translate_button_xpath)))
     text_translate_button = driver.find_element(By.XPATH, text_translate_button_xpath)
     text_translate_button.click()
+
+def uploadGlossaryTextTranslationPage():
+    add_business_glossary_button_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload"]/div/div[4]/div/button'
+    WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, add_business_glossary_button_xpath)))
+    add_business_glossary_button = driver.find_element(By.XPATH, add_business_glossary_button_xpath)
+    add_business_glossary_button.click()
+
+    add_glossary_button_xpath_2 = '/html/body/div[3]/div/div/div[2]/div/div/div/div[1]/button'
+    WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, add_glossary_button_xpath_2)))
+    add_glossary_button_2 = driver.find_element(By.XPATH, add_glossary_button_xpath_2)
+    add_glossary_button_2.click()
+
+    upload_glossary_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[2]/div[3]/div/div/input'
+    WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, upload_glossary_xpath)))
+    upload_glossary = driver.find_element(By.XPATH, upload_glossary_xpath)
+    upload_glossary.send_keys('businessGlossaries/test_bg.csv')
+
 def loadFileTranslationPage():
     try:
         # Finds 'File' button and clicks on it, taking it to the File Translation page 
