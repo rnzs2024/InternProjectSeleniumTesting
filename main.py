@@ -95,7 +95,7 @@ def runTC05():
         translation_service = 'Google' # Must be exactly 'Microsoft' or 'Google'
         helperMethods.returnToTextTranslationPage()
         helperMethods.uploadGlossaryTextTranslationPage(source_language, target_language, business_glossary)
-        # helperMethods.textTranslationTest(sample_text, source_language, target_language, translation_service)
+        helperMethods.textTranslationTest(sample_text, source_language, target_language, translation_service)
         
     except Exception as e:
         print(f"Error during TC05: {e}")

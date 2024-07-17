@@ -19,20 +19,35 @@ def startUpApp():
 
     global driver
     global chrome_options
-    # Variable to store custom settings for browser
-    chrome_options = webdriver.ChromeOptions()
 
-    # Adds custom setting to keep browser open
-    chrome_options.add_experimental_option("detach", True)
+    try:
+        # Variable to store custom settings for browser
+        chrome_options = webdriver.ChromeOptions()
 
-    chrome_options.add_argument("--incognito")
+        # Adds custom setting to keep browser open
+        chrome_options.add_experimental_option("detach", True)
 
-    driver = webdriver.Chrome(options = chrome_options) # Stores options into web driver
+        chrome_options.add_argument("--incognito")
 
+        driver = webdriver.Chrome(options = chrome_options) # Stores options into web driver
 
-    driver.get("https://translation.amgen.com/file-translation") # Opens AI Translation app FT page - allows script to access buttons on top
+        environment = testSettings.universalSettings.environment
+        environment_ext = ''
 
-    #time.sleep(10) # wait for popup to time out and log in page to load -> now handled by login function
+        if (environment == 'dev'):
+            environment_ext = '-dev'
+        elif (environment == 'uat'):
+            environment_ext = '-uat'
+        elif (environment == 'prod'):
+            environment_ext = ''
+        else:
+            environment_ext = '-dev'
+
+        driver.get(f"https://translation{environment_ext}.amgen.com/file-translation") # Opens AI Translation app FT page - allows script to access buttons on top
+
+        #time.sleep(10) # wait for popup to time out and log in page to load -> now handled by login function
+    except Exception as e:
+        print(f"Error during startup app: {e}")
 
 ############################### LOG IN ###############################
 
@@ -170,6 +185,15 @@ def textTranslationTest(sample_text, source_language, target_language,translatio
         sample_text_translation_search_button.click()
 
         time.sleep(1.5)
+        
+        #test to click preview button
+        # preview_button_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload-log"]/div/section/div[2]/div/div/div/div/div/div/div/div/table/tbody/tr[1]/td[7]/div/div/div/svg[1]'
+        
+        # WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.CSS_SELECTOR, preview_button_xpath)))
+
+        # preview_button = driver.find_element(By.XPATH, preview_button_xpath)
+        # preview_button.click()
+        #test
 
         sample_text_translation_search_clear_button_xpath = '//*[@id="uncontrolled-tab-example-tabpane-file-upload-log"]/div/section/div[1]/div/div/div/span/span/span[1]/span/span'
         sample_text_translation_search_clear_button = driver.find_element(By.XPATH, sample_text_translation_search_clear_button_xpath)
@@ -206,6 +230,7 @@ def uploadGlossaryTextTranslationPage(source_language, target_language, business
     add_business_glossary_button = driver.find_element(By.XPATH, add_business_glossary_button_xpath)
     add_business_glossary_button.click()
 
+    ##### COMMENT OUT SECTION IF BG UPLOAD STILL NOT WORKING #####
     add_glossary_button_xpath_2 = '/html/body/div[3]/div/div/div[2]/div/div/div/div[1]/button'
     WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, add_glossary_button_xpath_2)))
     add_glossary_button_2 = driver.find_element(By.XPATH, add_glossary_button_xpath_2)
@@ -249,17 +274,29 @@ def uploadGlossaryTextTranslationPage(source_language, target_language, business
     back_button_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[1]/span'
     back_button = driver.find_element(By.XPATH, back_button_xpath)
     back_button.click()
+    ############
 
     glossary_page_load_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[1]/div[2]/div[3]/div[1]/div[2]'
     WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, glossary_page_load_xpath)))
 
     search_for_glossary_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[1]/div[2]/div[2]/div/span/span/span[1]/input'
     search_for_glossary = driver.find_element(By.XPATH, search_for_glossary_xpath)
-    search_for_glossary.send_keys(business_glossary)
-    search_for_glossary.send_keys(Keys.ENTER)
+    search_for_glossary.send_keys(business_glossary) # use 'rohan_english_arabic_testing' if bg not able to be uploaded
+
+    search_button_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[1]/div[2]/div[2]/div/span/span/span[2]/button'
+    search_button = driver.find_element(By.XPATH, search_button_xpath)
+    search_button.click()
 
     # add ability to click the plus button to add glossary and then click add to translation button
-    
+    use_glossary_button_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[1]/div[2]/div[3]/div[2]/div[3]/span[1]/span'
+    driver.implicitly_wait(3)
+    use_glossary_button = driver.find_element(By.XPATH, use_glossary_button_xpath)
+    use_glossary_button.click()
+
+    add_to_translation_button_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[2]/button[2]'
+    add_to_translation_button = driver.find_element(By.XPATH, add_to_translation_button_xpath)
+    add_to_translation_button.click()
+
 def loadFileTranslationPage():
     try:
         # Finds 'File' button and clicks on it, taking it to the File Translation page 
