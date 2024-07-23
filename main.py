@@ -89,7 +89,6 @@ def runTC05():
     try:
         sample_text = testSettings.sample_text
         business_glossary = testSettings.textTranslationTestSettings.business_glossary
-        # business_glossary = os.path.abspath(f'./businessGlossaries/{business_glossary}')
         source_language = 'English' # Must be exact match as in dropdown or empty for Auto Detect
         target_language = 'Arabic' # Must be exact match as in dropdown
         translation_service = 'Google' # Must be exactly 'Microsoft' or 'Google'
@@ -113,6 +112,21 @@ def runTC06():
     except Exception as e:
         print(f"Error during TC06: {e}")
 
+def runTC07():
+
+    try:
+        sample_text = testSettings.sample_text
+        business_glossary = testSettings.textTranslationTestSettings.business_glossary
+        source_language = 'English' # Must be exact match as in dropdown or empty for Auto Detect
+        target_language = 'Chinese (Simplified)' # Must be exact match as in dropdown
+        translation_service = 'Google' # Must be exactly 'Microsoft' or 'Google'
+        helperMethods.returnToTextTranslationPage()
+        helperMethods.uploadGlossaryTextTranslationPage(source_language, target_language, business_glossary)
+        helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
+
+    except Exception as e:
+        print(f"Error during TC07: {e}")
+
 def runTC08():
 
     try:
@@ -125,6 +139,21 @@ def runTC08():
 
     except Exception as e:
         print(f"Error during TC08: {e}")
+
+def runTC09():
+
+    try:
+        sample_text = testSettings.sample_text
+        business_glossary = testSettings.textTranslationTestSettings.business_glossary
+        source_language = 'French' # Must be exact match as in dropdown or empty for Auto Detect
+        target_language = 'Japanese' # Must be exact match as in dropdown
+        translation_service = 'Google' # Must be exactly 'Microsoft' or 'Google'
+        helperMethods.returnToTextTranslationPage()
+        helperMethods.uploadGlossaryTextTranslationPage(source_language, target_language, business_glossary)
+        helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
+
+    except Exception as e:
+        print(f"Error during TC09: {e}")
 
 def runTC10():
 
@@ -139,6 +168,21 @@ def runTC10():
     except Exception as e:
         print(f"Error during TC10: {e}")
 
+def runTC11():
+
+    try:
+        sample_text = testSettings.sample_text
+        business_glossary = testSettings.textTranslationTestSettings.business_glossary
+        source_language = 'English' # Must be exact match as in dropdown or empty for Auto Detect
+        target_language = 'Hindi' # Must be exact match as in dropdown
+        translation_service = 'Google' # Must be exactly 'Microsoft' or 'Google'
+        helperMethods.returnToTextTranslationPage()
+        helperMethods.uploadGlossaryTextTranslationPage(source_language, target_language, business_glossary)
+        helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
+
+    except Exception as e:
+        print(f"Error during TC11: {e}")
+
 def runTC12():
 
     try:
@@ -151,6 +195,21 @@ def runTC12():
 
     except Exception as e:
         print(f"Error during TC12: {e}")
+
+def runTC13():
+
+    try:
+        sample_text = testSettings.sample_text
+        business_glossary = testSettings.textTranslationTestSettings.business_glossary
+        source_language = 'English' # Must be exact match as in dropdown or empty for Auto Detect
+        target_language = 'Arabic' # Must be exact match as in dropdown
+        translation_service = 'Microsoft' # Must be exactly 'Microsoft' or 'Google'
+        helperMethods.returnToTextTranslationPage()
+        helperMethods.uploadGlossaryTextTranslationPage(source_language, target_language, business_glossary)
+        helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
+
+    except Exception as e:
+        print(f"Error during TC13: {e}")
 
 def runTC14():
 
@@ -165,6 +224,21 @@ def runTC14():
     except Exception as e:
         print(f"Error during TC14: {e}")
 
+def runTC15():
+
+    try:
+        sample_text = testSettings.sample_text
+        business_glossary = testSettings.textTranslationTestSettings.business_glossary
+        source_language = 'French' # Must be exact match as in dropdown or empty for Auto Detect
+        target_language = 'Japanese' # Must be exact match as in dropdown
+        translation_service = 'Microsoft' # Must be exactly 'Microsoft' or 'Google'
+        helperMethods.returnToTextTranslationPage()
+        helperMethods.uploadGlossaryTextTranslationPage(source_language, target_language, business_glossary)
+        helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
+
+    except Exception as e:
+        print(f"Error during TC15: {e}")
+
 def runTC16():
 
     try:
@@ -178,48 +252,67 @@ def runTC16():
     except Exception as e:
         print(f"Error during TC16: {e}")
 
+def runTC17():
+
+    try:
+        sample_text = testSettings.sample_text
+        business_glossary = testSettings.textTranslationTestSettings.business_glossary
+        source_language = 'English' # Must be exact match as in dropdown or empty for Auto Detect
+        target_language = 'Hindi' # Must be exact match as in dropdown
+        translation_service = 'Microsoft' # Must be exactly 'Microsoft' or 'Google'
+        helperMethods.returnToTextTranslationPage()
+        helperMethods.uploadGlossaryTextTranslationPage(source_language, target_language, business_glossary)
+        helperMethods.textTranslationTest(sample_text, source_language, target_language,translation_service)
+
+    except Exception as e:
+        print(f"Error during TC17: {e}")
+
 def runTC18():
     try:
         helperMethods.loadFileTranslationPage()
     except Exception as e:
         print(f"Error during TC18: {e}")
 
-for i in execution_list:
-    if (i == 'TC_01_Open_And_Login_Application'):
-        runTC01()
-    if (i == 'TC_02_Logout_And_Close_Application'):
-        runTC02()
-    if (i == 'TC_03_Load_Text_Translation_Page'):
-        runTC03()
-    if (i == 'TC_04_Google_Text_Translation_English_Arabic'):
-        runTC04()
-    if (i == 'TC_05_Google_Text_Translation_English_Arabic_With_Glossary'):
-        runTC05()
-    if (i == 'TC_06_Google_Text_Translation_English_Chinese'):
-        runTC06()
-    if (i == 'TC_07_Google_Text_Translation_English_Chinese_With_Glossary'):
-        print("Coming soon")
-    if (i == 'TC_08_Google_Text_Translation_French_Japanese'):
-        runTC08()
-    if (i == 'TC_09_Google_Text_Translation_French_Japanese_With_Glossary'):
-        print("Coming soon")
-    if (i == 'TC_10_Google_Text_Translation_English_Hindi'):
-       runTC10()
-    if (i == 'TC_11_Google_Text_Translation_English_Hindi_With_Glossary'):
-       print("Coming soon")
-    if (i == 'TC_12_Microsoft_Text_Translation_English_Arabic'):
-       runTC12()
-    if (i == 'TC_13_Microsoft_Text_Translation_English_Arabic_With_Glossary'):
-       print("Coming soon")
-    if (i == 'TC_14_Microsoft_Text_Translation_French_Japanese'):
-       runTC14()
-    if (i == 'TC_15_Microsoft_Text_Translation_French_Japanese_With_Glossary'):
-       print("Coming soon")
-    if (i == 'TC_16_Microsoft_Text_Translation_English_Hindi'):
-       runTC16()
-    if (i == 'TC_17_Microsoft_Text_Translation_English_Hindi_With_Glossary'):
-       print("Coming soon")
-    if (i == 'TC_18_Load_File_Translation_Page'):
-       runTC18()
+if __name__ == "__main__":
+    try:
+        for i in execution_list:
+            if (i == 'TC_01_Open_And_Login_Application'):
+                runTC01()
+            if (i == 'TC_02_Logout_And_Close_Application'):
+                runTC02()
+            if (i == 'TC_03_Load_Text_Translation_Page'):
+                runTC03()
+            if (i == 'TC_04_Google_Text_Translation_English_Arabic'):
+                runTC04()
+            if (i == 'TC_05_Google_Text_Translation_English_Arabic_With_Glossary'):
+                runTC05()
+            if (i == 'TC_06_Google_Text_Translation_English_Chinese'):
+                runTC06()
+            if (i == 'TC_07_Google_Text_Translation_English_Chinese_With_Glossary'):
+                runTC07()
+            if (i == 'TC_08_Google_Text_Translation_French_Japanese'):
+                runTC08()
+            if (i == 'TC_09_Google_Text_Translation_French_Japanese_With_Glossary'):
+                runTC09()
+            if (i == 'TC_10_Google_Text_Translation_English_Hindi'):
+                runTC10()
+            if (i == 'TC_11_Google_Text_Translation_English_Hindi_With_Glossary'):
+                runTC11()
+            if (i == 'TC_12_Microsoft_Text_Translation_English_Arabic'):
+                runTC12()
+            if (i == 'TC_13_Microsoft_Text_Translation_English_Arabic_With_Glossary'):
+                runTC13()
+            if (i == 'TC_14_Microsoft_Text_Translation_French_Japanese'):
+                runTC14()
+            if (i == 'TC_15_Microsoft_Text_Translation_French_Japanese_With_Glossary'):
+                runTC15()
+            if (i == 'TC_16_Microsoft_Text_Translation_English_Hindi'):
+                runTC16()
+            if (i == 'TC_17_Microsoft_Text_Translation_English_Hindi_With_Glossary'):
+                runTC17()
+            if (i == 'TC_18_Load_File_Translation_Page'):
+                runTC18()
+    except Exception as e:
+        print(f"Unable to execute: {e}")
        
     

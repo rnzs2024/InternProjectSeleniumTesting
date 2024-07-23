@@ -6,7 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 import time
-from datetime import date
+from datetime import date, datetime
 from creds import *
 import os
 import testSettings
@@ -155,8 +155,7 @@ def textTranslationTest(sample_text, source_language, target_language,translatio
         WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, translated_text_xpath)))
 
         translated_text = driver.find_element(By.XPATH, translated_text_xpath).text
-        print(translated_text)
-
+        print(f"{source_language} to {target_language} translation: {translated_text}")
         time.sleep(1.5)
         ### Add History tab test  - make sure to everything below for Microsoft ####
 
@@ -230,6 +229,38 @@ def uploadGlossaryTextTranslationPage(source_language, target_language, business
     add_business_glossary_button = driver.find_element(By.XPATH, add_business_glossary_button_xpath)
     add_business_glossary_button.click()
 
+    # Check if glossary already exists
+
+    try:
+        glossary_page_load_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[1]/div[2]/div[3]/div[1]/div[2]'
+        WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, glossary_page_load_xpath)))
+        search_for_glossary_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[1]/div[2]/div[2]/div/span/span/span[1]/input'
+        search_for_glossary = driver.find_element(By.XPATH, search_for_glossary_xpath)
+        search_for_glossary.send_keys(business_glossary) # use 'rohan_english_arabic_testing' if bg not able to be uploaded
+        search_for_glossary.send_keys(Keys.ENTER)
+        glossary_page_load_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[1]/div[2]/div[3]/div[1]/div[2]'
+        WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, glossary_page_load_xpath)))
+
+        # search_button_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[1]/div[2]/div[2]/div/span/span/span[2]/button'
+        # search_button = driver.find_element(By.XPATH, search_button_xpath)
+        # search_button.click()
+
+        # add ability to click the plus button to add glossary and then click add to translation button
+        use_glossary_button_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[1]/div[2]/div[3]/div[2]/div[3]/span[1]/span'
+        WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, use_glossary_button_xpath)))
+
+        use_glossary_button = driver.find_element(By.XPATH, use_glossary_button_xpath)
+        use_glossary_button.click()
+
+        add_to_translation_button_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[2]/button[2]'
+        add_to_translation_button = driver.find_element(By.XPATH, add_to_translation_button_xpath)
+        add_to_translation_button.click()
+        time.sleep(2)
+        return None
+    
+    except:
+        pass
+
     ##### COMMENT OUT SECTION IF BG UPLOAD STILL NOT WORKING #####
     add_glossary_button_xpath_2 = '/html/body/div[3]/div/div/div[2]/div/div/div/div[1]/button'
     WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, add_glossary_button_xpath_2)))
@@ -239,8 +270,17 @@ def uploadGlossaryTextTranslationPage(source_language, target_language, business
     upload_glossary_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[2]/div[3]/div/div/input'
     WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, upload_glossary_xpath)))
     upload_glossary = driver.find_element(By.XPATH, upload_glossary_xpath)
+
+    variable_suffix = f'_{source_language}_{target_language}'  # Your variable to append
+
+    # Construct the new filename with the suffix appended
+    new_filename = os.path.splitext(business_glossary)[0] + variable_suffix + os.path.splitext(business_glossary)[1]
+    print(new_filename)
+
     test_bg_abs_path = os.path.abspath(f'./businessGlossaries/{testSettings.textTranslationTestSettings.business_glossary}')
+
     print(test_bg_abs_path)
+
     upload_glossary.send_keys(test_bg_abs_path)
     
     wait_for_upload_glossary_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[2]/div[3]/span'
@@ -260,7 +300,7 @@ def uploadGlossaryTextTranslationPage(source_language, target_language, business
 
     description_box_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[2]/div[5]/textarea'
     description_box = driver.find_element(By.XPATH, description_box_xpath)
-    today_date = date.today()
+    today_date = datetime.now()
     description_input = f'Testing {source_language} to {target_language} translation on {today_date}'
     description_box.send_keys(description_input)
 
@@ -269,17 +309,24 @@ def uploadGlossaryTextTranslationPage(source_language, target_language, business
     time.sleep(0.25)
     upload_glossary_button.click()
 
-    time.sleep(9)
+    # Provide time for glossary to upload
+    upload_glossary_popup_xpath = '//*[@id="root"]/div/div/div[1]/div/div/div[2]'
+    WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, upload_glossary_popup_xpath)))
+    time.sleep(6)
     
-    back_button_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[1]/span'
-    back_button = driver.find_element(By.XPATH, back_button_xpath)
-    back_button.click()
+    # back_button_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[1]/span'
+    # back_button = driver.find_element(By.XPATH, back_button_xpath)
+    # back_button.click()
     ############
+
+
 
     glossary_page_load_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[1]/div[2]/div[3]/div[1]/div[2]'
     WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, glossary_page_load_xpath)))
 
     search_for_glossary_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[1]/div[2]/div[2]/div/span/span/span[1]/input'
+    
+
     search_for_glossary = driver.find_element(By.XPATH, search_for_glossary_xpath)
     search_for_glossary.send_keys(business_glossary) # use 'rohan_english_arabic_testing' if bg not able to be uploaded
 
@@ -289,13 +336,15 @@ def uploadGlossaryTextTranslationPage(source_language, target_language, business
 
     # add ability to click the plus button to add glossary and then click add to translation button
     use_glossary_button_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[1]/div[2]/div[3]/div[2]/div[3]/span[1]/span'
-    driver.implicitly_wait(3)
+    WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, use_glossary_button_xpath)))
+
     use_glossary_button = driver.find_element(By.XPATH, use_glossary_button_xpath)
     use_glossary_button.click()
 
     add_to_translation_button_xpath = '/html/body/div[3]/div/div/div[2]/div/div/div/div[2]/button[2]'
     add_to_translation_button = driver.find_element(By.XPATH, add_to_translation_button_xpath)
     add_to_translation_button.click()
+    time.sleep(2)
 
 def loadFileTranslationPage():
     try:
